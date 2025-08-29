@@ -1,47 +1,21 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
-  <!-- Use compiled app.css when available, and fall back to the Tailwind CDN for dev / quick fix -->
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <script>
-    // If app.css isn't loaded (no stylesheet rules), load Tailwind from CDN as a quick fallback
-    (function() {
-      var cssLoaded = false;
-      try {
-        cssLoaded = window.getComputedStyle(document.documentElement).getPropertyValue('--tw-ring-offset-shadow') !== '';
-      } catch (e) {}
-      if (!cssLoaded) {
-        var s = document.createElement('script');
-        s.src = 'https://cdn.tailwindcss.com';
-        s.defer = true;
-        document.head.appendChild(s);
-      }
-    })();
-  </script>
-  </head>
-    <body class="min-h-screen flex items-center justify-center bg-gray-100">
-    <div class="w-full max-w-md bg-white p-6 rounded shadow mx-4">
-      <h1 class="text-2xl font-semibold mb-4">Login</h1>
-      @if($errors->any())
-        <div class="text-red-600 mb-3">{{ $errors->first() }}</div>
-      @endif
-    <form method="POST" action="{{ route('login.attempt') }}" class="space-y-4">
-        @csrf
-        <div class="mb-3">
-      <label class="block text-sm">Email</label>
-      <input name="email" type="email" value="{{ old('email') }}" class="w-full border rounded p-2" />
-        </div>
-        <div class="mb-3">
-      <label class="block text-sm">Password</label>
-      <input name="password" type="password" class="w-full border rounded p-2" />
-        </div>
-        <div class="flex items-center justify-between">
-      <button class="px-4 py-2 bg-blue-600 text-white rounded">Login</button>
-        </div>
-      </form>
+@extends('layouts.app')
+@section('title', 'Login')
+@section('content')
+<div class="flex justify-center items-center min-h-screen">
+    <div class="w-full max-w-md p-8 space-y-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold text-center">Admin Login</h1>
+        <form method="POST" action="{{ route('login') }}" class="space-y-6">
+            @csrf
+            <div>
+                <label for="email" class="block mb-2 text-sm font-medium">Email</label>
+                <input type="email" name="email" id="email" class="w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-600" required>
+            </div>
+            <div>
+                <label for="password" class="block mb-2 text-sm font-medium">Password</label>
+                <input type="password" name="password" id="password" class="w-full p-2.5 bg-gray-50 border border-gray-300 rounded-lg dark:bg-gray-700 dark:border-gray-600" required>
+            </div>
+            <button type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Login</button>
+        </form>
     </div>
-  </body>
-</html>
+</div>
+@endsection
