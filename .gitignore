@@ -1,0 +1,15 @@
+/vendor/
+/node_modules/
+/public/build/
+/public/storage
+/storage/*.key
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+/.env
+/database/*.sqlite
+.env.local
+.idea/
+.vscode/
+.DS_Store
