@@ -10,11 +10,12 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Outerweb\FilamentTranslatableFields\Forms\Components\Translatable;
+use BackedEnum;
 
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationLabel = 'المنتجات';
     protected static ?int $navigationSort = 1;
 

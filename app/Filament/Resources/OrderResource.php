@@ -18,11 +18,12 @@ use Illuminate\Database\Eloquent\Collection;
 use App\Exports\OrdersExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Filament\Tables\Actions\HeaderAction;
+use BackedEnum;
 
 class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
-    protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
+    protected static BackedEnum|string|null $navigationIcon = 'heroicon-o-shopping-cart';
     protected static ?string $navigationLabel = 'الطلبات';
     protected static ?int $navigationSort = 2;
 
