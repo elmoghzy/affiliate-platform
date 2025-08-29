@@ -15,15 +15,16 @@ class OrderStoreRequest extends FormRequest
     {
         return [
             'product_id' => ['required', 'exists:products,id'],
-            'customer_name' => ['required', 'string', 'min:3'],
+            'customer_name' => ['required', 'string', 'min:3', 'max:255'],
             'phone' => ['required', 'regex:/^(?:\+?20)?0?1[0125]\d{8}$/'],
-            'address' => ['required', 'string', 'min:8'],
-            'email' => ['nullable', 'email'],
+            'address' => ['required', 'string', 'min:10'],
+            'email' => ['nullable', 'email', 'max:255'],
             'notes' => ['nullable', 'string'],
-            'utm_source' => ['nullable', 'string'],
-            'utm_campaign' => ['nullable', 'string'],
-            'utm_adset' => ['nullable', 'string'],
-            'utm_ad' => ['nullable', 'string'],
+            'utm_source' => ['nullable', 'string', 'max:255'],
+            'utm_campaign' => ['nullable', 'string', 'max:255'],
+            'utm_adset' => ['nullable', 'string', 'max:255'],
+            'utm_ad' => ['nullable', 'string', 'max:255'],
+            'website' => ['prohibited'], // P10 Honeypot
         ];
     }
 
@@ -31,15 +32,11 @@ class OrderStoreRequest extends FormRequest
     {
         return [
             'product_id' => 'المنتج',
-            'customer_name' => 'اسم العميل',
-            'phone' => 'الهاتف',
+            'customer_name' => 'الاسم الكامل',
+            'phone' => 'رقم الهاتف',
             'address' => 'العنوان',
             'email' => 'البريد الإلكتروني',
             'notes' => 'ملاحظات',
-            'utm_source' => 'مصدر التتبع',
-            'utm_campaign' => 'حملة',
-            'utm_adset' => 'مجموعة الإعلان',
-            'utm_ad' => 'الإعلان',
         ];
     }
 }

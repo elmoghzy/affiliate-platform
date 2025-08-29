@@ -1,23 +1,20 @@
 <?php
 
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\Auth\LoginController;
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
 Route::get('/p/{product:slug}', [ProductController::class, 'show'])->name('product.show');
-
-Route::post('/orders', [OrderController::class, 'store'])->middleware('throttle:10,1')->name('orders.store');
-
-Route::view('/thanks', 'thanks')->name('thanks');
-
-// Minimal authentication routes so Filament ->login() works when Breeze/etc. isn't installed
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login'])->name('login.attempt');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
+Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+Route::view('/thanks', 'pages.thanks')->name('thanks');

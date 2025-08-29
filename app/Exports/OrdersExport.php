@@ -6,21 +6,32 @@ use App\Models\Order;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Illuminate\Database\Eloquent\Builder;
 
 class OrdersExport implements FromQuery, WithHeadings, WithMapping
 {
-    public function __construct(protected $query)
+    public function __construct(protected Builder $query)
     {
     }
 
-    public function query()
+    public function query(): Builder
     {
         return $this->query;
     }
 
     public function headings(): array
     {
-        return ['id','product','customer_name','phone','status','created_at','utm_source','utm_campaign','utm_adset','utm_ad'];
+        return [
+            'ID',
+            'Product',
+            'Customer Name',
+            'Phone',
+            'Address',
+            'Status',
+            'Date',
+            'UTM Source',
+            'UTM Campaign',
+        ];
     }
 
     public function map($order): array
@@ -30,12 +41,11 @@ class OrdersExport implements FromQuery, WithHeadings, WithMapping
             $order->product?->name,
             $order->customer_name,
             $order->phone,
-            $order->status,
-            $order->created_at?->toDateTimeString(),
+            $order->address,
+            $order->status->value,
+            $order->created_at->toDateTimeString(),
             $order->utm_source,
             $order->utm_campaign,
-            $order->utm_adset,
-            $order->utm_ad,
         ];
     }
 }
