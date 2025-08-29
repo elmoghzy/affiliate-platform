@@ -2,48 +2,62 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\Product;
-use App\Models\Order;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
 
 class OrderSubmitTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_order_is_saved_successfully()
+    /** @test */
+    public function a_valid_order_can_be_submitted_successfully()
     {
-        // use Arabic locale for the app during the test
-        $this->app->setLocale('ar');
+        // 1. Arrange
+        $product = Product::factory()->create(['is_active' => true]);
 
-        $product = Product::create([
-            'name' => 'منتج اختبار',
-            'slug' => 'test-product',
-            'description' => 'وصف',
-            'price' => 100.00,
-            'image_path' => '/images/placeholder.png',
-            'category' => 'test',
-            'is_active' => true,
-        ]);
-
-        $response = $this->post('/orders', [
+        $orderData = [
             'product_id' => $product->id,
-            'customer_name' => 'عميل اختبار',
-            'phone' => '+201001234567',
-            'address' => 'عنوان تجريبي 12',
-            'email' => null,
-            'notes' => null,
-            // honeypot left empty
-            'website' => '',
-        ]);
+            'customer_name' => 'Test Customer',
+            'phone' => '01001234567',
+            'address' => '123 Test Street, Cairo',
+        ];
 
-        $response->assertRedirect('/thanks');
+        // 2. Act
+        $response = $this->post(route('orders.store'), $orderData);
+
+        // 3. Assert
+        $response->assertRedirect(route('thanks'));
 
         $this->assertDatabaseHas('orders', [
             'product_id' => $product->id,
-            'customer_name' => 'عميل اختبار',
-            'phone' => '+201001234567',
+            'customer_name' => 'Test Customer',
+            'phone' => '01001234567',
             'status' => 'new',
+        ]);
+    }
+
+    /** @test */
+    public function an_order_with_honeypot_field_is_rejected()
+    {
+        // 1. Arrange
+        $product = Product::factory()->create(['is_active' => true]);
+
+        $orderDataWithHoneypot = [
+            'product_id' => $product->id,
+            'customer_name' => 'Test Bot',
+            'phone' => '01001234567',
+            'address' => '123 Test Street, Cairo',
+            'website' => 'i-am-a-bot', // Honeypot field filled
+        ];
+
+        // 2. Act
+        $response = $this->post(route('orders.store'), $orderDataWithHoneypot);
+
+        // 3. Assert
+        $response->assertSessionHasErrors('website');
+        $this->assertDatabaseMissing('orders', [
+            'customer_name' => 'Test Bot',
         ]);
     }
 }

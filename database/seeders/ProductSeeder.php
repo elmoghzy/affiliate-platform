@@ -15,55 +15,55 @@ class ProductSeeder extends Seeder
         $products = [
             [
                 'name' => [
-                    'ar' => 'هاتف ذكي تجريبي',
-                    'en' => 'Demo Smartphone'
+                    'en' => 'Demo Smartphone',
+                    'ar' => 'هاتف ذكي تجريبي'
                 ],
                 'slug' => 'smartphone-demo',
                 'description' => [
-                    'ar' => 'هاتف ذكي بمواصفات متوازنة ومناسب للاستخدام اليومي.',
-                    'en' => 'Smartphone with balanced specifications suitable for daily use.'
+                    'en' => 'Smartphone with balanced specifications suitable for daily use.',
+                    'ar' => 'هاتف ذكي بمواصفات متوازنة ومناسب للاستخدام اليومي.'
                 ],
                 'price' => 1499.00,
-                'image_path' => '/images/products/phone.png',
+                'image_path' => 'products/phone.png',
                 'category' => [
-                    'ar' => 'إلكترونيات',
-                    'en' => 'electronics'
+                    'en' => 'Electronics',
+                    'ar' => 'إلكترونيات'
                 ],
                 'is_active' => true,
             ],
             [
                 'name' => [
-                    'ar' => 'سماعات لاسلكية',
-                    'en' => 'Wireless Headphones'
+                    'en' => 'Wireless Headphones',
+                    'ar' => 'سماعات لاسلكية'
                 ],
                 'slug' => 'wireless-headphones',
                 'description' => [
-                    'ar' => 'سماعات مريحة وصوت نقي مع إلغاء الضوضاء.',
-                    'en' => 'Comfortable headphones with clear sound and noise cancellation.'
+                    'en' => 'Comfortable headphones with clear sound and noise cancellation.',
+                    'ar' => 'سماعات مريحة وصوت نقي مع إلغاء الضوضاء.'
                 ],
                 'price' => 299.50,
-                'image_path' => '/images/products/headphones.png',
+                'image_path' => 'products/headphones.png',
                 'category' => [
-                    'ar' => 'صوتيات',
-                    'en' => 'audio'
+                    'en' => 'Audio',
+                    'ar' => 'صوتيات'
                 ],
                 'is_active' => true,
             ],
             [
                 'name' => [
-                    'ar' => 'ساعة ذكية',
-                    'en' => 'Smart Watch'
+                    'en' => 'Smart Watch',
+                    'ar' => 'ساعة ذكية'
                 ],
                 'slug' => 'smartwatch-demo',
                 'description' => [
-                    'ar' => 'ساعة ذكية لمتابعة النشاطات والصحة مع بطارية طويلة.',
-                    'en' => 'Smart watch for tracking activities and health with long battery life.'
+                    'en' => 'Smart watch for tracking activities and health with long battery life.',
+                    'ar' => 'ساعة ذكية لمتابعة النشاطات والصحة مع بطارية طويلة.'
                 ],
                 'price' => 799.00,
-                'image_path' => '/images/products/watch.png',
+                'image_path' => 'products/watch.png',
                 'category' => [
-                    'ar' => 'أجهزة قابلة للارتداء',
-                    'en' => 'wearables'
+                    'en' => 'Wearables',
+                    'ar' => 'أجهزة قابلة للارتداء'
                 ],
                 'is_active' => true,
             ],

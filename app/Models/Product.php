@@ -4,11 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Translatable\HasTranslations;
 
 class Product extends Model
 {
     use HasFactory, HasTranslations;
+
+    public array $translatable = ['name', 'description', 'category'];
 
     protected $fillable = [
         'name',
@@ -25,5 +28,8 @@ class Product extends Model
         'is_active' => 'boolean',
     ];
 
-    public $translatable = ['name', 'description', 'category'];
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
 }

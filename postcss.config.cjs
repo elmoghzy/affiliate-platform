@@ -1,8 +1,7 @@
 module.exports = {
   plugins: {
-  '@tailwindcss/postcss': {},
+    tailwindcss: {},
     autoprefixer: {},
-    // postcss-rtl can be used to transform output to RTL when building
-    'postcss-rtl': {}
-  }
+    'postcss-rtlcss': {}
+  },
 }
