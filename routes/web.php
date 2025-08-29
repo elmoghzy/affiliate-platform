@@ -3,6 +3,7 @@
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/p/{product:slug}', [ProductController::class, 'show'])->name('product.show');
 Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 Route::view('/thanks', 'pages.thanks')->name('thanks');
+
+// Authentication Routes for Filament
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
